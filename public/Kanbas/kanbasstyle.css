@@ -1,0 +1,18 @@
+body {
+    margin: 0;
+    padding: 0;
+  }
+  body * {
+    font-family: Arial, Helvetica, sans-serif;
+
+    .wd-kanbas-navigation li {
+      margin-bottom: 5px; /* Adds spacing between list items */
+  }
+
+  .wd-kanbas-navigation li a {
+      display: inline-block; /* Allows for margin and padding to be applied */
+      margin: 5px; /* Applies margin around the link */
+      padding: 5px; /* Applies padding around the link */
+  }
+  }
+  
