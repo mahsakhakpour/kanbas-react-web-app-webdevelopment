@@ -1,13 +1,12 @@
 import React from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import "./index.css";
+import assignments from "../../../Database/assignments.json";
 
-
-//import { assignments } from "../../../Database";
 function AssignmentEditor() {
   const { assignmentId } = useParams();
-  {/*const assignment = assignments.find(
-  (assignment) => assignment._id === assignmentId);*/}
+  const assignment = assignments.find(
+    (assignment) => assignment._id === assignmentId);
   const { courseId } = useParams();
   const navigate = useNavigate();
   const handleSave = () => {
@@ -17,8 +16,8 @@ function AssignmentEditor() {
   return (
     <div>
       <h2>Assignment Name</h2>
-      {/*<input value={assignment?.title}
-             className="form-control mb-2" />*/}
+      <input value={assignment?.title}
+             className="form-control mb-2" />
       <button onClick={handleSave} className="btn btn-success ms-2 float-end">
         Save
       </button>
@@ -26,8 +25,6 @@ function AssignmentEditor() {
             className="btn btn-danger float-end">
         Cancel
       </Link>
-          {/*////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
-          <h1>HTML file</h1>
     </div>
   );
 }

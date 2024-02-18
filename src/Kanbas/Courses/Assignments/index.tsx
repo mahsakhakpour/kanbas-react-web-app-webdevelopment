@@ -12,20 +12,13 @@ function Assignments() {
 
   const assignments = db.assignments;
     const assignmentList = assignments.filter((assignment) => assignment.course === courseId);
-
-
-
   console.log(courseId)
   return (
     <>
-    <h2> Asssignments</h2>
-
-
-        
+    <h2> Asssignments</h2>        
     <table width="100%">
       <tbody>
         <tr>
-
           <td>
             <button>Group</button>
             <button>Assignment</button>
@@ -60,13 +53,8 @@ function Assignments() {
             </li>))}
           </ul>
         </li>
-      </ul>
-             
-
-      
-    </>
-
-    
+      </ul>      
+    </>    
 );}
 export default Assignments;
 

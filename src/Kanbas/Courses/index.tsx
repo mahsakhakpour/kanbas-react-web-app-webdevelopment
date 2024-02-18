@@ -13,8 +13,8 @@ import Grades from "./Grades";
 
 
 function Courses() {
-    const {cid} = useParams ();
-    const course = database.courses.find((course) => course._id === cid);
+    const {courseId} = useParams ();
+    const course = database.courses.find((course) => course._id === courseId);
     return (
 <>
     <div>
@@ -28,7 +28,7 @@ function Courses() {
             <Route path="/" element={<Navigate to="Home" />} />
             <Route path="Home" element={<Home/>} />
             <Route path="Modules" element={<Modules/>} />
-            <Route path="Modules" element={<ModuleList/>} />
+            {/*<Route path="Modules" element={<ModuleList/>} />*/}
             <Route path="Piazza" element={<h1>Piazza</h1>} />
             <Route path="Assignments" element={<Assignments/>} />
             <Route path="Assignments/:assignmentId"  element={<AssignmentEditor/>}/>

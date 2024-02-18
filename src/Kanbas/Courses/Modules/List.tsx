@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import "./index.css";
-import modules from "../../Database/modules.json"; // Import the entire object
+import modules from "../../Database/modules.json"; 
 import { FaEllipsisV, FaCheckCircle, FaPlusCircle } from "react-icons/fa";
 import { useParams } from "react-router";
 
+
 function ModuleList() {
-  const { cid } = useParams();
-  console.log (cid)
-  const modulesList = modules.filter((module) => module.course === cid);
+  const { courseId } = useParams();
+  console.log (courseId)
+  const modulesList = modules.filter((module) => module.course === courseId);
   const [selectedModule, setSelectedModule] = useState(modulesList[0]);
   return (
     <>
