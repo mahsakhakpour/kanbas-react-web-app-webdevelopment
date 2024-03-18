@@ -32,7 +32,7 @@ function Assignments() {
 
     let assignmentsList = useSelector((state: KanbasState) => state.assignmentsReducer.assignments);
     assignmentsList=assignmentsList.filter((assignment) => assignment.course === courseId)
-    
+    console.log(assignmentsList)
 
   const handleCreateAssignment = () => {
     const assignmentData = {}; 

@@ -3,8 +3,9 @@ import { FaCheckCircle, FaEllipsisV, FaPlusCircle} from "react-icons/fa";
 import { Link, useLocation, useParams } from "react-router-dom";
 import db from "../../../Database";
 import "./index.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addAssignment, deleteAssignment, updateAssignment } from "./../assignmentsReducer";
+import { KanbasState } from "../../../store";
 
 
 
@@ -19,7 +20,7 @@ function Assignments() {
   const [assignmentdate, setAssignmentDate] = useState(new Date());
   const [availableFromDate, setAvailableFromDate] = useState(new Date());
   const [availableUntilDate, setAvailableUntilDate] = useState(new Date());
-  const assignments = db.assignments;
+  const assignments =  useSelector((state: KanbasState) => state.assignmentsReducer.assignments);;
   const assignmentList = assignments.filter(
     (assignment) => assignment.course === courseId);
   
@@ -27,43 +28,25 @@ function Assignments() {
     const pathName = useLocation();
 
 
-
-    
-
-
-    // const handleSave = () => {
-    //   const assignmentData = {
-    //     name: assignmentName,
-    //     description: assignmentDescription,
-    //     points: assignmentPoints,
-    //     dueDate: assignmentdate,
-    //     availableFromDate: availableFromDate,
-    //     availableUntilDate: availableUntilDate,
-    //     course: courseId
-    //   };
-
-    // var n : number = (pathName.pathname.lastIndexOf("/"));
-    // const assignmentId : string = pathName.pathname.substring(n+1);
-    // console.log(assignmentId);
-    // const newAssignment = db.assignments.filter(
-    //   (assignment) => assignment._id === assignmentId);
-    
-    // dispatch(addAssignment(assignmentData));
-    
-    // };
     const handleSave = () => {
       const assignmentData = {
-        name: assignmentName,
+        title: assignmentName,
         description: assignmentDescription,
         points: assignmentPoints,
-        dueDate: assignmentdate,
-        availableFromDate: availableFromDate,
-        availableUntilDate: availableUntilDate,
+        dueDate: assignmentdate.toString(),
+        availableFromDate: availableFromDate.toString(),
+        availableUntilDate: availableUntilDate.toString(),
         course: courseId 
       };
+      console.log(assignmentData)
     
       dispatch(addAssignment(assignmentData));
     };
+
+
+
+
+
     
   
   const handleCreateAssignment = () => {
