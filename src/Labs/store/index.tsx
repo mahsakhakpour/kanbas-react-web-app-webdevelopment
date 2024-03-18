@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import HelloReducer from "../a4/ReduxExamples/HelloRedux/HelloReducer";
 import counterReducer from "../a4/ReduxExamples/CounterRedux/counterReducer";
 import addReducer from "../a4/ReduxExamples/AddRedux/addReducer";
 import TodoList from "../a4/ReduxExamples/todos/TodoList";
 import todoReducer from "../a4/ReduxExamples/todos/todoReducer";
+import helloReducer from "../a4/ReduxExamples/HelloRedux/helloReducer";
 
 export type TodoType = {
   id: string;
@@ -14,16 +14,14 @@ export interface LabState {
     helloReducer: { message: string; };
     counterReducer: { count: number; };
     addReducer: { sum: number; }; 
-    todosReducer: {
+    todoReducer: {
       todos: TodoType[];
       todo: TodoType;
     };
-    
-  
 }
 const store = configureStore({
   reducer: {
-    HelloReducer,
+    helloReducer,
     counterReducer,
     addReducer,
     todoReducer,

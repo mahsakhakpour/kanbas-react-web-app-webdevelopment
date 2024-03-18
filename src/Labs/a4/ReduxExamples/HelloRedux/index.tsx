@@ -2,8 +2,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { LabState } from "../../../store";
 function HelloRedux() {
   const { message } = useSelector((state: LabState) => state.helloReducer);
-  // console.log('mmmmmm');
-  //debugger;
   return (
     <div>
       <h1>Hello Redux</h1>

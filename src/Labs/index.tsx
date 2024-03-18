@@ -15,7 +15,7 @@ function Labs() {
       <Nav />
       <Link to="/Labs/a3">Assignment3</Link> |
       <Link to="/Labs/a4">Assignment4</Link>
-      <ReduxExamples/>
+      {/* <ReduxExamples/> */}
       <Routes>
         <Route path="/" element={<Navigate to="a3"/>}/>
         <Route path="a3" element={<Assignment3/>}/>

@@ -6,21 +6,21 @@ import Highlight from "./Highlight";
 import Add from "./Add";
 import TodoItem from "./Todos/TodoItem";
 import PathParameters from "./JavaScript/Routing/PathParameters";
-// import { useSelector } from "react-redux";
-// import { LabState } from "../store";
+import { useSelector } from "react-redux";
+import { LabState } from "../store";
 
 function Assignment3() {
-  // const { todos } = useSelector((state: LabState) => state.todosReducer);
+  const { todos } = useSelector((state: LabState) => state.todoReducer);
     return (
       <div className="container">
         <h1>Assignment 3</h1>
-         {/* <ul className="list-group">
+          <ul className="list-group">
         {todos.map((todo) => (
           <li className="list-group-item" key={todo.id}>
             {todo.title}
           </li>
         ))}
-      </ul>         */}
+      </ul>         
         <PathParameters />
         <JavaScript/>        
         <Classes/>
