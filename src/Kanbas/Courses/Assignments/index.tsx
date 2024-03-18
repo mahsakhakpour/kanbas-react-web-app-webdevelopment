@@ -22,69 +22,6 @@ interface AssignmentsEditorProps {
   assignment: Assignment;
 }
 
-// function AssignmentsEditor({ assignment }: AssignmentsEditorProps) {
-//   const dispatch = useDispatch();
-//   const [assignmentName, setAssignmentName] = useState(assignment.title);
-//   const [assignmentDescription, setAssignmentDescription] = useState(assignment.description);
-//   const [assignmentPoints, setAssignmentPoints] = useState(assignment.points);
-//   const [assignmentDate, setAssignmentDate] = useState(assignment.date);
-//   const [availableFromDate, setAvailableFromDate] = useState(assignment.availableFrom);
-//   const [availableUntilDate, setAvailableUntilDate] = useState(assignment.availableUntil);
-
-//   const handleSave = () => {
-//     const updatedAssignment = {
-//       ...assignment,
-//       title: assignmentName,
-//       description: assignmentDescription,
-//       points: assignmentPoints,
-//       date: assignmentDate,
-//       availableFrom: availableFromDate,
-//       availableUntil: availableUntilDate
-//     };
-//     console.log(updatedAssignment)
-//     dispatch(updateAssignment(updatedAssignment));
-  
-//   };
-
-//   const handleCancel = () => {
-    
-//   };
-
-//   return (
-//     <>
-//       <h2>Edit Assignmen</h2>
-//       <div>
-//         <label>Title:</label>
-//         <input type="text" value={assignmentName} onChange={(e) => setAssignmentName(e.target.value)} />
-//       </div>
-//       <div>
-//         <label>Description:</label>
-//         <textarea value={assignmentDescription} onChange={(e) => setAssignmentDescription(e.target.value)} />
-//       </div>
-//       <div>
-//         <label>Points:</label>
-//         <input type="text" value={assignmentPoints} onChange={(e) => setAssignmentPoints(e.target.value)} />
-//       </div>
-//       <div>
-//         <label>Date:</label>
-//         <input type="date" value={assignmentDate.toString()} onChange={(e) => setAssignmentDate(new Date(e.target.value))} />
-//       </div>
-//       <div>
-//         <label>Available From:</label>
-//         <input type="date" value={availableFromDate.toString()} onChange={(e) => setAvailableFromDate(new Date(e.target.value))} />
-//       </div>
-//       <div>
-//         <label>Available Until:</label>
-//         <input type="date" value={availableUntilDate.toString()} onChange={(e) => setAvailableUntilDate(new Date(e.target.value))} />
-//       </div>
-//       <div className="container">
-//         <button className="save-button" onClick={handleSave}>Save</button>
-//         <button className="delete-button" onClick={handleCancel}>Cancel</button>
-//       </div>
-//     </>
-//   );
-// }
-
 function Assignments() {
   const { courseId } = useParams();
   const dispatch = useDispatch();

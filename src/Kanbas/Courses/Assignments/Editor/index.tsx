@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaCheckCircle, FaEllipsisV, FaPlusCircle} from "react-icons/fa";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import db from "../../../Database";
 import "./index.css";
 import { useDispatch } from "react-redux";
@@ -22,7 +22,35 @@ function Assignments() {
   const assignments = db.assignments;
   const assignmentList = assignments.filter(
     (assignment) => assignment.course === courseId);
+  
+    
+    const pathName = useLocation();
 
+
+
+    
+
+
+    // const handleSave = () => {
+    //   const assignmentData = {
+    //     name: assignmentName,
+    //     description: assignmentDescription,
+    //     points: assignmentPoints,
+    //     dueDate: assignmentdate,
+    //     availableFromDate: availableFromDate,
+    //     availableUntilDate: availableUntilDate,
+    //     course: courseId
+    //   };
+
+    // var n : number = (pathName.pathname.lastIndexOf("/"));
+    // const assignmentId : string = pathName.pathname.substring(n+1);
+    // console.log(assignmentId);
+    // const newAssignment = db.assignments.filter(
+    //   (assignment) => assignment._id === assignmentId);
+    
+    // dispatch(addAssignment(assignmentData));
+    
+    // };
     const handleSave = () => {
       const assignmentData = {
         name: assignmentName,
@@ -31,9 +59,10 @@ function Assignments() {
         dueDate: assignmentdate,
         availableFromDate: availableFromDate,
         availableUntilDate: availableUntilDate,
-        course: courseId
+        course: courseId 
       };
-      dispatch(updateAssignment(assignmentData));
+    
+      dispatch(addAssignment(assignmentData));
     };
     
   
