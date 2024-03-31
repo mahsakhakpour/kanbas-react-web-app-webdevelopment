@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaCheckCircle, FaEllipsisV, FaPlusCircle, FaTrash } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
 import db from "../../Database";
 import "./index.css";
 import { useDispatch, useSelector } from "react-redux";
-import { addAssignment, deleteAssignment, updateAssignment } from "./assignmentsReducer";
+import { addAssignment, deleteAssignment, updateAssignment, setAssignment, setAssignments } from "./assignmentsReducer";
 import { KanbasState } from "../../store";
+import { findAssignmentForCourse, createAssignment } from "./client";
+import * as client from "./client";
 
 interface Assignment {
   _id: string;
@@ -24,100 +26,58 @@ interface AssignmentsEditorProps {
 
 function Assignments() {
   const { courseId } = useParams();
+
+  useEffect(() => {
+    findAssignmentForCourse(courseId)
+      .then((assignments) =>
+        dispatch(setAssignments(assignments))
+    );
+  }, [courseId]);
+
+
+  const assignmentsList = useSelector((state: KanbasState) => state.assignmentsReducer.assignments);
+  const assignment = useSelector((state: KanbasState) => state.assignmentsReducer.assignment);
   const dispatch = useDispatch();
-  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-  const [assignmentToDelete, setAssignmentToDelete] = useState<string | null>(null);
-  
- 
-
-    let assignmentsList = useSelector((state: KanbasState) => state.assignmentsReducer.assignments);
-    assignmentsList=assignmentsList.filter((assignment) => assignment.course === courseId)
-    console.log(assignmentsList)
-
-  const handleCreateAssignment = () => {
-    const assignmentData = {}; 
-    dispatch(addAssignment(assignmentData));
-  };
-
-  const handleDeleteAssignment = (assignmentId: string) => {
-    setAssignmentToDelete(assignmentId);
-    setShowDeleteDialog(true);
-  };
-
-  const confirmDeleteAssignment = (assignmentId: string | null) => {
-    if (assignmentId) {
-      dispatch(deleteAssignment(assignmentId));
-      setShowDeleteDialog(false);
-    }
-  };
-
-  const cancelDeleteAssignment = () => {
-    setShowDeleteDialog(false);
-  };
 
   return (
-    <>
-      <h2>Assignments</h2>
-      <ul className="list-group">
-        <li className="list-group-item">
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <div style={{ flex: '1' }}>
-              <input
-                type="text"
-                placeholder="Search for assignment"
-                style={{ width: '200px', padding: '5px' }}
-              />
-            </div>
-            <div>
-              <button onClick={handleCreateAssignment}>+Group</button>
-              <Link to={`/Kanbas/Courses/${courseId}/Assignments/new`}><button 
-              style={{ backgroundColor: 'red', color: 'white'}}>+ Assignment</button></Link>
-            </div>
-          </div>
-
-          <ul className="list-group wd-modules">
-            <li className="list-group-item">
-              <div>
-                <FaEllipsisV className="me-2" /> ASSIGNMENTS
-                <span className="float-end">
-                  <FaPlusCircle className="ms-2" onClick={handleCreateAssignment} />
-                  <FaEllipsisV className="ms-2" />
-                </span>
-              </div>
-              <ul className="list-group">
-                {assignmentsList.map((assignment) => (
-                  <li className="list-group-item d-flex justify-content-between align-items-center" key={assignment._id}>
-                    <div>
-                      <FaEllipsisV className="me-2" />
-                      <Link to={`/Kanbas/Courses/${courseId}/Assignments/${assignment._id}`}>
-                        {assignment.title}
-                      </Link>
-                    </div>
-                    <div>
-                      <FaCheckCircle className="text-success me-2" />
-                      <FaTrash className="text-danger" onClick={() => handleDeleteAssignment(assignment._id)} />
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul>
-
-      {showDeleteDialog && (
-        <div className="delete-dialog">
-          <div className="modal-content">delete
-            <p>Are you sure you want to delete this assignment?</p>
-            <div>
-              
-              <button onClick={() => confirmDeleteAssignment(assignmentToDelete)}>Yes</button>
-              <button onClick={cancelDeleteAssignment}>No</button>
-            </div>
-          </div>
+    <ul className="list-group">
+      <li className="list-group-item">
+        <input
+          value={assignment.name}
+          onChange={(e) => dispatch(setAssignment({ ...assignment, name: e.target.value }))} />
+        <br />
+        <br />
+        <textarea
+          value={assignment.description}
+          onChange={(e) => dispatch(setAssignment({ ...assignment, description: e.target.value }))} />
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
+          <button
+            onClick={() => dispatch(addAssignment({ ...assignment, course: courseId }))}
+            style={{ backgroundColor: 'green', color: 'white', marginLeft: '5px' }}>Add</button>
+          <button
+            onClick={() => dispatch(updateAssignment(assignment))}
+            style={{ backgroundColor: 'blue', color: 'white', marginLeft: '5px' }}>Update</button>
         </div>
-      )}
-    </>
+      </li>
+      {assignmentsList
+        .filter((assignment) => assignment.course === courseId)
+        .map((assignment, index) => (
+          <li key={index} className="list-group-item" style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div>
+              <h3>{assignment.name}</h3>
+              <p>{assignment.description}</p>
+            </div>
+            <div>
+              <button
+                onClick={() => dispatch(setAssignment(assignment))}
+                style={{ backgroundColor: 'green', color: 'white', marginRight: '5px' }}>Edit</button>
+              <button
+                onClick={() => dispatch(deleteAssignment(assignment._id))}
+                style={{ backgroundColor: 'red', color: 'white' }}>Delete</button>
+            </div>
+          </li>
+        ))}
+    </ul>
   );
 }
 

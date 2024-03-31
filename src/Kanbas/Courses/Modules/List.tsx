@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addModule, deleteModule, updateModule, setModule } from "./reducer";
+import { addModule, deleteModule, updateModule, setModule, setModules } from "./reducer";
+import { findModulesForCourse } from "./client";
 import { KanbasState } from "../../store";
 
 function ModuleList() {
   const { courseId } = useParams();
+
+  useEffect(() => {
+    findModulesForCourse(courseId)
+      .then((modules) =>
+        dispatch(setModules(modules))
+    );
+  }, [courseId]);
+
+
   const moduleList = useSelector((state: KanbasState) => state.modulesReducer.modules);
   const module = useSelector((state: KanbasState) => state.modulesReducer.module);
   const dispatch = useDispatch();
