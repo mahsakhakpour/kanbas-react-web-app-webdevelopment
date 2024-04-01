@@ -6,14 +6,14 @@ function EncodingParametersInURLs() {
   const [welcome, setWelcome] = useState("");
 
   const fetchWelcome = async () => {
-    const response = await axios.get("http://localhost:4000/a5/welcome");
+    const response = await axios.get("https://kanbas-node-server-app-asv9.onrender.com/a5/welcome");
     setWelcome(response.data);
   };
 
   const [result, setResult] = useState(0);
   const fetchSum = async (a: number, b: number) => {
     const response = await
-      axios.get(`http://localhost:4000/a5/add/${a}/${b}`);
+      axios.get(`https://kanbas-node-server-app-asv9.onrender.com/a5/add/${a}/${b}`);
     setResult(response.data);
   };
   const fetchSubtraction = async (a: number, b: number) => {

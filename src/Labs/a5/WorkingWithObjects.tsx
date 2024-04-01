@@ -7,7 +7,7 @@ function WorkingWithObjects() {
     description: "Create a NodeJS server with ExpressJS",
     due: "2021-10-10", completed: false, score: 0,
   });
-  const ASSIGNMENT_URL = "http://localhost:4000/a5/assignment"
+  const ASSIGNMENT_URL = "https://kanbas-node-server-app-asv9.onrender.com/a5/assignment"
 
   const fetchAssignment = async () => {
     const response = await axios.get(`${ASSIGNMENT_URL}`);
@@ -29,7 +29,7 @@ function WorkingWithObjects() {
     description: "Spring 2024",
     course: "CS5610"
   });
-  const MODULE_URL = "http://localhost:4000/a5/module"
+  const MODULE_URL = "https://kanbas-node-server-app-asv9.onrender.com/a5/module"
 
   return (
     <div>
@@ -63,19 +63,19 @@ function WorkingWithObjects() {
       <h3>Working With Objects</h3>
       <h4>Retrieving Objects</h4>
       <a className="btn btn-primary"
-        href="http://localhost:4000/a5/assignment">Get Assignment</a>
+        href="https://kanbas-node-server-app-asv9.onrender.com/a5/assignment">Get Assignment</a>
 
       <h4>Retrieving Properties</h4>
       <a className="btn btn-primary"
-        href="http://localhost:4000/a5/assignment/title">Get Title</a>
+        href="https://kanbas-node-server-app-asv9.onrender.com/a5/assignment/title">Get Title</a>
 
       <h4>Retrieving Modules</h4>
       <a className="btn btn-primary"
-        href="http://localhost:4000/a5/module">Get Module</a>
+        href="https://kanbas-node-server-app-asv9.onrender.com/a5/module">Get Module</a>
 
       <h4>Retrieving Modules Name</h4>
       <a className="btn btn-primary"
-        href="http://localhost:4000/a5/module/modulename">Get Module Name</a>
+        href="https://kanbas-node-server-app-asv9.onrender.com/a5/module/modulename">Get Module Name</a>
 
 
       <h4>Modifying Properties</h4>
