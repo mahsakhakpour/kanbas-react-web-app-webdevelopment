@@ -2,11 +2,35 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addModule, deleteModule, updateModule, setModule, setModules } from "./reducer";
-import { findModulesForCourse } from "./client";
+import { createModule, findModulesForCourse } from "./client";
 import { KanbasState } from "../../store";
+import * as client from "./client";
 
 function ModuleList() {
   const { courseId } = useParams();
+
+ const handleAddModule = () => {
+    createModule(courseId, module).then((module: any) => {
+      dispatch(addModule(module));
+    });
+  };
+
+  const handleDeleteModule = (moduleId: string) => {
+    client.deleteModule(moduleId).then((status) => {
+      dispatch(deleteModule(moduleId));
+    });
+  };
+
+
+  const handleUpdateModule = async () => {
+    const status = await client.updateModule(module);
+    dispatch(updateModule(module));
+  };
+
+
+
+
+
 
   useEffect(() => {
     findModulesForCourse(courseId)
@@ -33,10 +57,10 @@ function ModuleList() {
           onChange={(e) => dispatch(setModule({ ...module, description: e.target.value }))} />
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
           <button
-            onClick={() => dispatch(addModule({ ...module, course: courseId }))}
+            onClick={handleAddModule}
             style={{ backgroundColor: 'green', color: 'white', marginLeft: '5px' }}>Add</button>
           <button
-            onClick={() => dispatch(updateModule(module))}
+            onClick={handleUpdateModule}
             style={{ backgroundColor: 'blue', color: 'white', marginLeft: '5px' }}>Update</button>
         </div>
       </li>
@@ -53,7 +77,7 @@ function ModuleList() {
                 onClick={() => dispatch(setModule(module))}
                 style={{ backgroundColor: 'green', color: 'white', marginRight: '5px' }}>Edit</button>
               <button
-                onClick={() => dispatch(deleteModule(module._id))}
+                onClick={() => handleDeleteModule(module._id)}
                 style={{ backgroundColor: 'red', color: 'white' }}>Delete</button>
             </div>
           </li>
