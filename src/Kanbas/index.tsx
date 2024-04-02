@@ -7,7 +7,7 @@ import Assignments from "./Courses/Assignments";
 import Grades from "./Courses/Grades";
 // import db from "./Database";
 import { useState, useEffect } from "react";
-import axios from "axios"; 
+import axios from "axios";
 import store from "./store";
 import { Provider } from "react-redux";
 
@@ -35,24 +35,19 @@ function Kanbas() {
     findAllCourses();
   }, []);
 
-
-
   const addNewCourse = async () => {
-    const response = await axios.post(COURSES_API, courses);
-  //   setCourses([...courses, { ...courses, _id: new Date().getTime().toString() }]);
-  // };
-
-  setCourses([ ...courses, response.data ]);
+    const response = await axios.post(COURSES_API, course);
+    setCourses([...courses, response.data]);
   };
 
   const deleteCourse = async (courseId: String) => {
-    // setCourses(courses.filter((course) => course._id !== courseId));
     const response = await axios.delete(
       `${COURSES_API}/${courseId}`
     );
-
+    setCourses(courses.filter((course) => course._id !== courseId));
   };
-  const updateCourse = async (updatedCourse: any) => {
+  const updateCourse = async () => {
+    console.log(course);
     const response = await axios.put(
       `${COURSES_API}/${course._id}`,
       course
@@ -60,31 +55,32 @@ function Kanbas() {
 
     setCourses(
       courses.map((c) => {
-        if (c._id === updatedCourse._id) {
+        if (c._id === course._id) {
           return course;
         }
-          return c;
-        
+        return c;
+
       })
     );
   };
-  
+
   return (
     <Provider store={store}>
-    <div className="d-flex">
-      <KanbasNavigation />
-      <div style={{ flexGrow: 1 }}>
-        <Routes>
-          <Route path="/" element={<Navigate to="Dashboard" />} />
-          <Route path="Account" element={<h1>Account</h1>} />
-          <Route path="/Dashboard" element={<Dashboard
+      <div className="d-flex">
+        <KanbasNavigation />
+        <div style={{ flexGrow: 1 }}>
+          <Routes>
+            <Route path="/" element={<Navigate to="Dashboard" />} />
+            <Route path="Account" element={<h1>Account</h1>} />
+            <Route path="/Dashboard" element={<Dashboard courseList={courses} 
+            addNewCourse={addNewCourse} updateCourse={updateCourse} deleteCourse={deleteCourse} course={course} setCourse={setCourse}
             />} />
-          {/* <Route path= "Courses/:courseId/*" element={<Courses />} /> */}
-          <Route path="Courses/:courseId/*" element={<Courses/>} />
+            {/* <Route path= "Courses/:courseId/*" element={<Courses />} /> */}
+            <Route path="Courses/:courseId/*" element={<Courses />} />
 
-        </Routes>
+          </Routes>
+        </div>
       </div>
-    </div>
     </Provider>
   );
 }
