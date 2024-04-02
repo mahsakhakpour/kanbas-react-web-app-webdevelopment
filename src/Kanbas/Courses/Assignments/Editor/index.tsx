@@ -4,7 +4,7 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import db from "../../../Database";
 import "./index.css";
 import { useDispatch, useSelector } from "react-redux";
-import { addAssignment, deleteAssignment, updateAssignment } from "./../assignmentsReducer";
+import { addAssignment, deleteAssignment, updateAssignment } from "../reducer";
 import { KanbasState } from "../../../store";
 
 

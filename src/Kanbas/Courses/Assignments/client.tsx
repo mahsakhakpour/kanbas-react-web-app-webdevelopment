@@ -1,12 +1,19 @@
 import axios from "axios";
-const API_BASE = process.env.REACT_APP_API_BASE;
-const COURSES_API =  `${API_BASE}/api/courses`;
-const MODULES_API =  `${API_BASE}/api/modules`;
 
+const API_BASE = process.env.REACT_APP_API_BASE;
+const COURSES_API = `${API_BASE}/api/courses`;
+const ASSIGNMENTS_API = `${API_BASE}/api/assignments`;
 
 export const deleteAssignment = async (assignmentId: any) => {
   const response = await axios
-    .delete(`${MODULES_API}/${assignmentId}`);
+    .delete(`${ASSIGNMENTS_API}/${assignmentId}`);
+  return response.data;
+};
+
+
+export const updateAssignment = async (assignment: { _id: any; }) => {
+  const response = await axios.
+    put(`${ASSIGNMENTS_API}/${assignment._id}`, assignment);
   return response.data;
 };
 
@@ -14,21 +21,13 @@ export const deleteAssignment = async (assignmentId: any) => {
 export const createAssignment = async (courseId: any, assignment: any) => {
   const response = await axios.post(
     `${COURSES_API}/${courseId}/assignments`,
-    module
+    assignment
   );
   return response.data;
 };
 
-
-export const findAssignmentForCourse = async (courseId: any) => {
+export const findAssignmentsForCourse = async (courseId: any) => {
   const response = await axios
     .get(`${COURSES_API}/${courseId}/assignments`);
   return response.data;
 };
-
-export const updateAssignment = async (assignment: { _id: any; }) => {
-  const response = await axios.
-    put(`${MODULES_API}/${assignment._id}`, assignment);
-  return response.data;
-};
-

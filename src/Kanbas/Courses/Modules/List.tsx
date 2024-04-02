@@ -9,11 +9,12 @@ import * as client from "./client";
 function ModuleList() {
   const { courseId } = useParams();
 
- const handleAddModule = () => {
+  const handleAddModule = () => {
     createModule(courseId, module).then((module: any) => {
       dispatch(addModule(module));
     });
   };
+
 
   const handleDeleteModule = (moduleId: string) => {
     client.deleteModule(moduleId).then((status) => {
@@ -33,8 +34,8 @@ function ModuleList() {
 
 
   useEffect(() => {
-    findModulesForCourse(courseId)
-      .then((modules) =>
+    client.findModulesForCourse(courseId)
+      .then((modules: any) =>
         dispatch(setModules(modules))
     );
   }, [courseId]);
@@ -75,7 +76,7 @@ function ModuleList() {
             <div>
               <button
                 onClick={() => dispatch(setModule(module))}
-                style={{ backgroundColor: 'green', color: 'white', marginRight: '5px' }}>Edit</button>
+                style={{ backgroundColor: 'yellow', color: 'black', marginRight: '5px' }}>Edit</button>
               <button
                 onClick={() => handleDeleteModule(module._id)}
                 style={{ backgroundColor: 'red', color: 'white' }}>Delete</button>
