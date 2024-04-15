@@ -23,7 +23,16 @@ const API_BASE = process.env.REACT_APP_API_BASE;
 
   const [course, setCourse] = useState<any>({ _id: "" });
   const findCourseById = async (courseId?: string) => {
-    const response = await axios.get(
+    
+    
+    const API = axios.create({
+      baseURL: COURSES_API, // API URL
+      withCredentials: true,
+  });
+
+    
+    
+    const response = await API.get(
       `${COURSES_API}/${courseId}`
     );
     setCourse(response.data);
