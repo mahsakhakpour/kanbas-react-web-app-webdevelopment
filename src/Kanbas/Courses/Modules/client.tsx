@@ -24,8 +24,6 @@ export const updateModule = async (module: { _id: any; }) => {
 };
 
 
-
-
 export const createModule = async (courseId: any, module: any) => {
   const response = await axios.post(
     `${COURSES_API}/${courseId}/modules`,

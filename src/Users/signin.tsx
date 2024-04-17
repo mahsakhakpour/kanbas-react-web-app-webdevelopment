@@ -7,6 +7,7 @@ export default function Signin() {
     username: "iron_man", password: "stark123", firstName: "", lastName: "", role: "USER"
   });
   const navigate = useNavigate();
+
   const signin = async () => {
     const response = await client.signin(credentials);
     console.log(response)

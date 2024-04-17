@@ -4,6 +4,7 @@ import data from "../Database/courses.json"
 import db from "../Database";
 import Home from "../Courses/Home";
 import axios from "axios"; 
+import assignments from "../Database/";
 
 const API_BASE = process.env.REACT_APP_API_BASE;
 function Dashboard({course, setCourse, courseList, addNewCourse, updateCourse, deleteCourse}: any) {

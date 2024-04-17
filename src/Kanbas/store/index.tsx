@@ -1,7 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import modulesReducer from "../Courses/Modules/reducer";
 import assignmentsReducer from "../Courses/Assignments/reducer";
+import quizzesReducer from "../Courses/Quizzes/reducer";
 export interface KanbasState {
+  // quizzesReducer: any;
   modulesReducer: {
     modules: any[];
     module: any;
@@ -11,11 +13,17 @@ export interface KanbasState {
     assignments: any[];
     assignment: any;
   };
+
+  quizzesReducer: {
+    quizzes: any[];
+    quiz: any;
+  };
 }
 const store = configureStore({
   reducer: {
     modulesReducer,
-    assignmentsReducer
+    assignmentsReducer,
+    quizzesReducer
   }
 });
 

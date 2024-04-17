@@ -13,6 +13,7 @@ import Grades from "./Grades";
 import db from "../Database"
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Quizzes from "./Quizzes"
 const API_BASE = process.env.REACT_APP_API_BASE;
 
 // function Courses({ courses }: { courses: any[]; }) {
@@ -59,10 +60,11 @@ const API_BASE = process.env.REACT_APP_API_BASE;
               <Route path="Home" element={<Home />} />
               <Route path="Modules" element={<Modules />} />
               {/* <Route path="Modules" element={<ModuleList/>} /> */}
-              <Route path="Piazza" element={<h1>Piazza</h1>} />
+              <Route path="" element={<h1>Piazza</h1>} />
               <Route path="Assignments" element={<Assignments />} />
               <Route path="Assignments/:assignmentId" element={<AssignmentEditor />} />
               <Route path="Grades" element={<Grades />} />
+              <Route path="Quizzes" element={<Quizzes />} />
             </Routes>
           </div>
         </div>
