@@ -1,6 +1,6 @@
 Kanbas React Web App
 Project Overview
-This project is a web application built with React, utilizing HTML, CSS, and JavaScript (JSX) to create a modern and interactive user interface. The main goal is to develop a functional app using current web development technologies.
+This project is a web application built with React, utilizing HTML, CSS, and JavaScript to create a modern and interactive user interface. The main goal is to develop a functional app using current web development technologies.
 Technologies Used
 •	React: A JavaScript library for building component-based user interfaces using JSX
 •	JavaScript (ES6+): The main programming language of the project
